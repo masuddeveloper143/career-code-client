@@ -62,25 +62,36 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             setLoading(false);
 
+
+
             if (currentUser?.email) {
-                const userData = { email: currentUser.email };
-                axios.post('http://localhost:3000/jwt', userData, {
-                    withCredentials: true
-
-                })
-
-
-
+                axios.post('http://localhost:3000/jwt', { email: currentUser.email }, {withCredentials: true})
                     .then(res => {
-                        console.log(res.data);
-
-                        localStorage.setItem('token', res.data.token);
+                        console.log(res.data)
                     })
-
                     .catch(error => {
-                        console.log(error);
+                        console.log(error)
                     })
             }
+
+
+            // if (currentUser?.email) {
+            //     const userData = { email: currentUser.email };
+            //     axios.post('http://localhost:3000/jwt', userData, {
+            //         withCredentials: true
+
+            //     })
+
+            //         .then(res => {
+            //             console.log(res.data);
+
+            //             localStorage.setItem('token', res.data.token);
+            //         })
+
+            //         .catch(error => {
+            //             console.log(error);
+            //         })
+            // }
 
             console.log('user in the auth state change', currentUser)
         })
